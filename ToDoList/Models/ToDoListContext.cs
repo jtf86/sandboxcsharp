@@ -8,7 +8,7 @@ namespace ToDoList.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-                .UseMySql(@"Server=localhost;Port=3306;database=to_do_list;uid=root;pwd=epicodus;");
+                .UseMySql(@"server=localhost;user id=root;password=root;port=3306;database=to_do_list;");
 
         public ToDoListContext(DbContextOptions options) : base(options)
         {
