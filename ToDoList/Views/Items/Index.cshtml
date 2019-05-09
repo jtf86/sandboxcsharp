@@ -8,5 +8,5 @@
             <p>@Html.ActionLink($"See Details for \"{item.Description}\"", "Details", new { id = item.ItemId })</p>
         }
     </ul>
-
+    <p>@Html.ActionLink("Add new item", "Create")</p>
     <p>@Html.ActionLink("Home", "Index", "Home")</p>
