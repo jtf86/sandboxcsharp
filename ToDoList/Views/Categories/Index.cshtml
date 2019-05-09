@@ -1,0 +1,15 @@
+    @model List<ToDoList.Models.Category>;
+        
+    <h1>To Do List - Categories</h1>
+    <ul>
+        @foreach(var category in Model)
+        {
+            <li>@Html.DisplayFor(currentCategoryDescription => category.Name)
+                | @Html.ActionLink("Edit", "Edit", new { id = category.CategoryId }) 
+                | @Html.ActionLink("Delete", "Delete", new { id = category.CategoryId })
+            </li>
+            <p>@Html.ActionLink($"See Details for \"{category.Name}\"", "Details", new { id = category.CategoryId })</p>
+        }
+    </ul>
+    <p>@Html.ActionLink("Add new category", "Create")</p>
+    <p>@Html.ActionLink("Home", "Index", "Home")</p>
