@@ -48,3 +48,5 @@ C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\ToDoList.
 C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\ToDoList.dll
 C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\ToDoList.pdb
 C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\ToDoList.csproj.CopyComplete
+C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\Razor\Views\Items\Create.g.cshtml.cs
+C:\Users\Mordor\Desktop\sandboxcsharp\ToDoList\obj\Debug\netcoreapp2.2\Razor\Views\Items\Details.g.cshtml.cs

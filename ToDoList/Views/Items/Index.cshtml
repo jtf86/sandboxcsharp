@@ -1,19 +1,12 @@
-@using ToDoList.Models;
+    @model List<ToDoList.Models.Item>;
+        
+    <h1>To Do List</h1>
+    <ul>
+        @foreach(var item in Model)
+        {
+            <li>@Html.DisplayFor(currentItemDescription => item.Description)</li>
+            <p>@Html.ActionLink($"See Details for \"{item.Description}\"", "Details", new { id = item.ItemId })</p>
+        }
+    </ul>
 
-<h1>To Do List</h1>
-<ul>
-
-@if (Model.Count == 0)
-{
-  <p>You have no items in your to do list!</p>
-}
-@if(Model.Count != 0)
-{
-  @foreach (Item item in Model)
-  {
-    <li>@item.Description</li>
-  }
-}
-
-</ul>
-<a href="/items/new">Add a new item.</a>
+    <p>@Html.ActionLink("Home", "Index", "Home")</p>
