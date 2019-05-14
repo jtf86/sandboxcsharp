@@ -11,13 +11,14 @@ namespace ToDoList.Controllers
         private ToDoListContext db = new ToDoListContext();
         public IActionResult Index()
         {
-            List<Category> model = db.Categories.ToList();
+            List<Category> model = db.Categories.Include(x => x.Items).ToList();
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            Category thisCategory = db.Categories.Include(x => x.Items).FirstOrDefault(Categories => Categories.CategoryId == id);
+            Category thisCategory = db.Categories
+                .FirstOrDefault(Categories => Categories.CategoryId == id);
             return View(thisCategory);
         }
 

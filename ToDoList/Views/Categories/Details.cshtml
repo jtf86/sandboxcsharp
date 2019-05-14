@@ -9,10 +9,7 @@
     <hr />
     @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
         <ul>
-        @foreach(var item in Model.Items)
-        {
-            <li>@Html.DisplayFor(currentItemDescription => item.Description)</li>
-        }
+
     </ul>
 
     <p>@Html.ActionLink("Back to list", "Index")</p>

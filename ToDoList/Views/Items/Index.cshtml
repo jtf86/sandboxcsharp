@@ -4,7 +4,7 @@
     <ul>
         @foreach(var item in Model)
         {
-            <li>@Html.DisplayFor(currentItemDescription => item.Description), @Html.DisplayFor(modelItem => item.Category.Name)
+            <li>@Html.DisplayFor(currentItemDescription => item.Description)
                 | @Html.ActionLink("Edit", "Edit", new { id = item.ItemId }) 
                 | @Html.ActionLink("Delete", "Delete", new { id = item.ItemId })
             </li>

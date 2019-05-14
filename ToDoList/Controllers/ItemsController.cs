@@ -3,20 +3,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
+using System;
 
 namespace ToDoList.Controllers
 {
     public class ItemsController : Controller
     {
         private ToDoListContext db = new ToDoListContext();
+
         public IActionResult Index()
         {
-            return View(db.Items.Include(items => items.Category).ToList());
+            return View(db.Items.ToList());
         }
         public IActionResult Details(int id)
         {
-            var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
+            var thisItem = db.Items
+                .Include(x => x.Categories)
+                .ThenInclude(y => y.Category)
+                .FirstOrDefault(items => items.ItemId == id);
             return View(thisItem);
+        }
+
+        [HttpPost]
+        public IActionResult AddCategory(int categoryId, int itemId)
+        {
+            db.CategoryItem.Add(new CategoryItem() {CategoryId = categoryId, ItemId = itemId});
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = itemId});
         }
         public IActionResult Create()
         {
@@ -24,9 +37,10 @@ namespace ToDoList.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Item item)
+        public IActionResult Create(Item item, int CategoryId)
         {
             db.Items.Add(item);
+            db.CategoryItem.Add(new CategoryItem() {CategoryId = CategoryId, ItemId = item.ItemId});
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -37,9 +51,11 @@ namespace ToDoList.Controllers
             return View(thisItem);
         }
         [HttpPost]
-        public IActionResult Edit(Item item)
+        public IActionResult Edit(Item item, int CategoryId)
         {
+            Console.WriteLine(CategoryId);
             db.Entry(item).State = EntityState.Modified;
+            db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
             db.SaveChanges();
             return RedirectToAction("Index");
         }
