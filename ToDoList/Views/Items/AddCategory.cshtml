@@ -1,0 +1,8 @@
+    @model ToDoList.Models.CategoryItem
+    
+    @using (Html.BeginForm())
+    {
+        @Html.Label("Select Category")
+        @Html.DropDownList("CategoryId")
+        <input type="submit" value="Add to category" />
+    }

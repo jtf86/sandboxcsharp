@@ -8,8 +8,8 @@ using ToDoList.Models;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ToDoListContext))]
-    [Migration("20190513210040_Intial")]
-    partial class Intial
+    [Migration("20190514195323_removeDualKey")]
+    partial class removeDualKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,25 @@ namespace ToDoList.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("categories");
+                });
+
+            modelBuilder.Entity("ToDoList.Models.CategoryItem", b =>
+                {
+                    b.Property<int>("CategoryItemId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<int>("ItemId");
+
+                    b.HasKey("CategoryItemId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("CategoryItem");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Item", b =>
@@ -35,22 +53,23 @@ namespace ToDoList.Migrations
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CategoryId");
-
                     b.Property<string>("Description");
 
                     b.HasKey("ItemId");
 
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Items");
+                    b.ToTable("items");
                 });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
+            modelBuilder.Entity("ToDoList.Models.CategoryItem", b =>
                 {
                     b.HasOne("ToDoList.Models.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ToDoList.Models.Item", "Item")
+                        .WithMany("Categories")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

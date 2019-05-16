@@ -9,7 +9,7 @@
     <hr />
     <h4>Edit this category: @Html.DisplayFor(model => model.Name)</h4>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("AddCategory"))
     {
         @Html.HiddenFor(model => model.CategoryId)
 
